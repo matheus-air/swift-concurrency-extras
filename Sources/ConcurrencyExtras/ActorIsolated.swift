@@ -40,6 +40,7 @@
 /// ```
 ///
 /// To synchronously isolate a value, see ``LockIsolated``.
+@available(iOS 13.0.0, *)
 public final actor ActorIsolated<Value> {
   /// The actor-isolated value.
   public var value: Value

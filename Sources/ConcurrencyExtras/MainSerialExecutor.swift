@@ -24,7 +24,8 @@
   /// > during the operation.
   ///
   /// - Parameter operation: An operation to be performed on the main serial executor.
-  @MainActor
+@available(iOS 13.0.0, *)
+@MainActor
   public func withMainSerialExecutor(
     @_implicitSelfCapture operation: @MainActor @Sendable () async throws -> Void
   ) async rethrows {
@@ -50,7 +51,8 @@
   /// ```
   ///
   /// - Parameter operation: An operation to be performed on the main serial executor.
-  public func withMainSerialExecutor(
+@available(iOS 13.0, *)
+public func withMainSerialExecutor(
     @_implicitSelfCapture operation: () throws -> Void
   ) rethrows {
     let didUseMainSerialExecutor = uncheckedUseMainSerialExecutor
@@ -64,7 +66,8 @@
   /// > Warning: When set to `true`, all tasks will be enqueued on the main serial executor till set
   /// > back to `false`. Consider using ``withMainSerialExecutor(operation:)-79jpc``, instead, which
   /// > scopes this work to the duration of a given operation.
-  public var uncheckedUseMainSerialExecutor: Bool {
+@available(iOS 13.0, *)
+public var uncheckedUseMainSerialExecutor: Bool {
     get { swift_task_enqueueGlobal_hook != nil }
     set {
       swift_task_enqueueGlobal_hook =
@@ -74,13 +77,18 @@
     }
   }
 
+  @available(iOS 13.0, *)
   private typealias Original = @convention(thin) (UnownedJob) -> Void
+  @available(iOS 13.0, *)
   private typealias Hook = @convention(thin) (UnownedJob, Original) -> Void
 
+  @available(iOS 13.0, *)
   private var swift_task_enqueueGlobal_hook: Hook? {
-    get { _swift_task_enqueueGlobal_hook.pointee }
-    set { _swift_task_enqueueGlobal_hook.pointee = newValue }
-  }
+      get { _swift_task_enqueueGlobal_hook.pointee }
+      set { _swift_task_enqueueGlobal_hook.pointee = newValue }
+    }
+    
+  @available(iOS 13.0, *)
   private let _swift_task_enqueueGlobal_hook: UnsafeMutablePointer<Hook?> =
-    dlsym(dlopen(nil, 0), "swift_task_enqueueGlobal_hook").assumingMemoryBound(to: Hook?.self)
+      dlsym(dlopen(nil, 0), "swift_task_enqueueGlobal_hook").assumingMemoryBound(to: Hook?.self)
 #endif

@@ -1,5 +1,6 @@
 import Foundation
 
+@available(iOS 13.0, *)
 extension Task where Success == Never, Failure == Never {
   /// Suspends the current task a number of times before resuming with the goal of allowing other
   /// tasks to start their work.
@@ -35,6 +36,7 @@ public let _defaultMegaYieldCount = max(
   )
 )
 
+@available(iOS 13.0, *)
 extension Task where Failure == Never {
   /// An async function that never returns.
   public static func never() async throws -> Success {
@@ -45,6 +47,7 @@ extension Task where Failure == Never {
   }
 }
 
+@available(iOS 13.0, *)
 extension Task where Success == Never, Failure == Never {
   /// An async function that never returns.
   public static func never() async throws {
@@ -53,6 +56,7 @@ extension Task where Success == Never, Failure == Never {
   }
 }
 
+@available(iOS 13.0, *)
 extension Task where Failure == Never {
   /// Waits for the result of the task, propagating cancellation to the task.
   ///
@@ -68,6 +72,7 @@ extension Task where Failure == Never {
   }
 }
 
+@available(iOS 13.0, *)
 extension Task where Failure == Error {
   /// Waits for the result of the task, propagating cancellation to the task.
   ///
